@@ -26,24 +26,31 @@ class Bay:
             return f"Bay {self.number} ({self.size}): free"
         return f"Bay {self.number} ({self.size}): {self.registration}"
 
+bays = [
+    Bay(1, "standard"),
+    Bay(2, "accessible"),
+    Bay(3, "standard")
+]
+
+for bay in bays:
+    print(bay.describe())
 
 first = Bay(1, "standard")
 second = Bay(2, "accessible")
-
-print(first.describe())
-print(second.describe())
+forth = Bay(3, "standard")
 
 first.park("AB12 CDE")
 
-print(first.describe())
-print(second.describe())
 
 print(first.is_free())
 print(second.is_free())
+print(forth.is_free())
 
-print(first.number, second.number)
+print(first.number, second.number, forth.number)
 
-third = second
-third.park("XY99 ZZZ")
-print(third.describe())
+second.park("XY99 ZZZ")
 print(second.describe())
+
+forth.park("EA14 WZV")
+print(forth.describe())
+
