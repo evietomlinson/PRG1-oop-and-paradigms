@@ -12,6 +12,7 @@ class Bay:
         self.number = number
         self.size = size
         self.registration = None
+        self.cars_parked = 0 
 
     def is_free(self):
         return self.registration is None
@@ -19,10 +20,15 @@ class Bay:
     def park(self, registration):
         if self.registration is None:
             self.registration = registration
+            self.cars_parked += 1 
             return True
         return False
 
     def leave(self):
+        if self.registration is None: 
+             print("The bay is empty.")
+             return None
+             
         leaving = self.registration
         self.registration = None
         return leaving
@@ -32,18 +38,29 @@ class Bay:
             return f"Bay {self.number} ({self.size}): free"
         return f"Bay {self.number} ({self.size}): {self.registration}"
 
+    def size_matches(self, wanted): 
+        wanted = "Standard"
+        if self.size is wanted: 
+            return True 
+        return False
 
-bay = Bay(1, "standard")
 
-print(bay.describe())
-print(bay.is_free())
+bay = Bay(1, "Standard")
 
-print(bay.park("AB12 CDE"))
-print(bay.describe())
-print(bay.is_free())
+print(bay.describe()) # bay 1 (standard )
+print(bay.is_free()) #True
 
-print(bay.park("XY99 ZZZ"))
-print(bay.describe())
-
+print(bay.park("AB12 CDE")) 
+print(bay.describe()) #
+print(bay.is_free()) #
 print(bay.leave())
-print(bay.describe())
+
+print(bay.park("XY99 ZZZ")) #
+print(bay.describe()) #
+
+print(bay.leave()) #
+print(bay.describe()) #
+
+print(bay.size_matches(""))
+print(f"Cars that have used this bay: {bay.cars_parked}")
+
